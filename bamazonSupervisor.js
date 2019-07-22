@@ -1,5 +1,5 @@
 require('dotenv').config();
-var keys = require("./connection.js");
+var keys = require("./keys.js");
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require("cli-table");
@@ -46,7 +46,7 @@ function menuOptionsSup() {
 }
 // SALES BY DEPT
 function departmentSales() {
-    connection.query("SELECT departments.department_id, departments.department_name, departments.overhead_costs, SUM(products.product_sales) AS total_products_sales, SUM(products.product_sales) - overhead_costs AS difference FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY department_name, department_id, overhead_costs", function (err, res) {
+    connection.query("SELECT departments.department_id, departments.department_name, departments.overhead_costs, SUM(products.product_sales) AS total_sales, SUM(products.product_sales) - overhead_costs AS difference FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY department_name, department_id, overhead_costs", function (err, res) {
         
         var table = new Table({
             head: ["ID", "Department", "Over Head Costs", "Product Sales", "Total Profits"],
@@ -54,7 +54,7 @@ function departmentSales() {
         })
         
         for (var i = 0; i < res.length; i++) {
-            table.push([res[i].department_id, res[i].department_name, "$" + res[i].overhead_costs.toFixed(2), "$" + res[i].total_products_sales.toFixed(2), "$" + res[i].difference])
+            table.push([res[i].department_id, res[i].department_name, "$" + res[i].overhead_costs.toFixed(2), "$" + res[i].total_sales.toFixed(2), "$" + res[i].difference])
         }
         console.log(table.toString());
         menuOptionsSup();

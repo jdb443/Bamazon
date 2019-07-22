@@ -49,7 +49,7 @@ INSERT INTO departments(department_name, overhead_costs) VALUES ("Vacuum Cleaner
 
 
 
--- SELECT * FROM department;
+SELECT * FROM departments;
 
 -- update department  set total_sales = (select sum(total_sales) from department d inner join products p on d.department_name= p.department_name); --
 

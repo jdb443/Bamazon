@@ -1,5 +1,5 @@
 require('dotenv').config();
-var keys = require("./connection.js");
+var keys = require("./keys.js");
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require("cli-table");

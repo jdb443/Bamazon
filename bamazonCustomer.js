@@ -1,5 +1,5 @@
 require('dotenv').config();
-var keys = require("./connection.js");
+var keys = require("./keys.js");
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require("cli-table");
@@ -95,7 +95,7 @@ function order(itemID, amount) {
             morePurchases();
         }
         else {
-            console.log(chalk.cyan("\nInsufficient quantity, sorry we do not have enough " + res[0].product_name.toUpperCase() + " to complete your order!\n"));
+            console.log(chalk.cyan("\nInsufficient quantity, sorry we do not have enough " + res[0].product_name.toUpperCase() + " in stock to complete your order!\n"));
             morePurchases();
         };
     
